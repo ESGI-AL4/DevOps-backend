@@ -16,3 +16,26 @@ jobs:
             - name: Run lint
               shell: bash
               run: ruff format --check
+    unit-test:
+        name: Unit tests
+        runs-on: ubuntu-latest
+        services:
+          db:
+            image: postgres:17.2
+            env: 
+              POSTGRES_DB: ${{ secrets.POSTGRES_DB}}
+              POSTGRES_USER: ${{ secrets.POSTGRES_USER}}
+              POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+            ports:
+              - "5432:5432"
+            volumes:
+              - db_data:/var/lib/postgresql/data
+        steps:
+          - uses: actions/setup-python@v4
+          - uses: actions/checkout@v4
+          - name: Setup environment
+            shell: bash
+            run: pip install -r requirements/dev.txt
+          - name: Run lint
+            shell: bash
+            run: python manage.py test
