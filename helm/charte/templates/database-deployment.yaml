@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name: {{ .Values.database.appName }}-deployment
+  labels:
+    app: {{ .Values.database.appName }}
+spec:
+  replicas: {{ .Values.database.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.database.appName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.database.appName }}
+    spec:
+      containers:
+        - name: {{ .Values.database.appName }}
+          image: {{ .Values.database.image }}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: {{ .Values.database.containerPort }}
+          env:
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  key: postgres_db
+                  name: {{ .Values.database.appName }}-configmap
+            - name: POSTGRES_USER
+              valueFrom:
+                configMapKeyRef:
+                  key: postgres_user
+                  name: {{ .Values.database.appName }}-configmap
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  key: postgres_password
+                  name: {{ .Values.database.appName }}-configmap

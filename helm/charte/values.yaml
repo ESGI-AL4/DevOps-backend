@@ -1,0 +1,21 @@
+backend:
+  image: votre-username/votre-image:votre-tag # Mettre le nom de votre image backend ici.
+  replicaCount: 1
+  containerPort: 8000
+  appName: backend
+  config:
+    db_host: database-service # Ici, il s'agit du nom du service créé dans le template database-service.yaml
+    db_user: my-user
+    db_password: my-password
+    db_name: my-db
+    db_port: 5432
+
+database:
+  image: postgres:17.2
+  replicaCount: 1
+  containerPort: 5432
+  appName: database
+  config:
+    postgres_db: my-db
+    postgres_user: my-user
+    postgres_password: my-password

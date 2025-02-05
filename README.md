@@ -92,3 +92,9 @@ variables :
  - `DB_NAME`: The name of the database
  - `DB_USER`: The user to connect to the database
  - `DB_PASSWORD`: The user's password
+
+
+## Run helm
+```
+helm upgrade --install --namespace votre-namespace ma-charte ./votre-charte --kubeconfig ./kubeconfig.yaml
+```
