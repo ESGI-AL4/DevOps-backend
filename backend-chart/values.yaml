@@ -1,0 +1,21 @@
+backend:
+  image: baguette42/devops_back:latest
+  replicaCount: 1
+  containerPort: 8000
+  appName: backend
+  config:
+    db_host: database-service # Ici, il s'agit du nom du service créé dans le template database-service.yaml
+    db_user: articles_user
+    db_password: articles_password
+    db_name: articles_db
+    db_port: 5432
+
+database:
+  image: postgres:17.2
+  replicaCount: 1
+  containerPort: 5432
+  appName: database
+  config:
+    postgres_db: articles_db
+    postgres_user: articles_user
+    postgres_password: articles_password

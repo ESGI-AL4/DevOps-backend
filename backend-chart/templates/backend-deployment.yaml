@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Release.Namespace }} # Cette valeur sera injectée au moment de déployer la charte.
+  name: {{ .Values.backend.appName }}-deployment
+  labels:
+    app: {{ .Values.backend.appName }}
+spec:
+  replicas: {{ .Values.backend.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.backend.appName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.backend.appName }}
+    spec:
+      containers:
+        - name: {{ .Values.backend.appName }}
+          image: {{ .Values.backend.image }}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: {{ .Values.backend.containerPort }}
+          env:
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: db_host
+                  name: {{ .Values.backend.appName }}-configmap
+            - name: DB_USER
+              valueFrom:
+                configMapKeyRef:
+                  key: db_user
+                  name: {{ .Values.backend.appName }}-configmap
+            - name: DB_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  key: db_password
+                  name: {{ .Values.backend.appName }}-configmap
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: db_name
+                  name: {{ .Values.backend.appName }}-configmap
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: db_port
+                  name: {{ .Values.backend.appName }}-configmap
