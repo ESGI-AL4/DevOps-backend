@@ -10,7 +10,7 @@ class CreateArticleTestCase(TestCase):
         # Given
         self.assertEqual(Article.objects.count(), 0)
         article_data = ArticleInSerializer(
-            data={"title": "Title 2", "subtitle": "Subtitle 1", "summary": "Summary"}
+            data={"title": "Title 1", "subtitle": "Subtitle 1", "summary": "Summary"}
         )
         self.assertTrue(article_data.is_valid())
 
