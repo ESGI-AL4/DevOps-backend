@@ -3,6 +3,7 @@ backend:
   replicaCount: 1
   containerPort: 8000
   appName: backend
+  host: "frontend-baguette.jbienvenu.fr"
   config:
     db_host: database-service # Ici, il s'agit du nom du service créé dans le template database-service.yaml
     db_user: articles_user

@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.decorators import api_view, renderer_classes
 from rest_framework.renderers import JSONRenderer
@@ -29,3 +30,6 @@ def articles_view(request):
             return Response(data=None, status=status.HTTP_201_CREATED)
         else:
             return Response(data.errors, status=status.HTTP_400_BAD_REQUEST)
+
+def health_view(request):
+    return JsonResponse({"status": "OK"})
