@@ -2,7 +2,7 @@ backend:
   image: baguette42/devops_back:latest
   replicaCount: 1
   containerPort: 8000
-  servicePort: 80
+  servicePort: 443
   appName: backend
   host: "backend-baguette.jbienvenu.fr"
   config:

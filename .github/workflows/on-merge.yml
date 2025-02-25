@@ -81,3 +81,21 @@ jobs:
           run: |
             helm upgrade --install backend-chart ./backend-chart \
               --namespace baguette-groupe-3
+    healthcheck:
+      needs: helm-deploy
+      name: Health Check
+      runs-on: ubuntu-latest
+      steps:
+        - name: Check Health Endpoint
+          run: |
+            for i in {1..10}; do
+              response=$(curl --silent --fail https://backend-baguette.jbienvenu.fr/health/ || true)
+              if echo "$response" | grep -q '"status": *"OK"'; then
+                echo "Health check passed!"
+                exit 0
+              fi
+              echo "Health check failed, retrying in 10 seconds..."
+              sleep 10
+            done
+            echo "Health check did not pass."
+            exit 1
