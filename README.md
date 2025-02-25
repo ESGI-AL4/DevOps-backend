@@ -96,5 +96,5 @@ variables :
 
 ## Run helm
 ```
-helm upgrade --install --namespace votre-namespace ma-charte ./votre-charte --kubeconfig ./kubeconfig.yaml
+helm upgrade --install --namespace baguette-groupe-3 backend-chart ./backend-chart --kubeconfig ./kubeconfig.yaml
 ```
