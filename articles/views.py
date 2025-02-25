@@ -30,7 +30,3 @@ def articles_view(request):
             return Response(data=None, status=status.HTTP_201_CREATED)
         else:
             return Response(data.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-def health_view(request):
-    return JsonResponse({"status": "OK"})
