@@ -4,7 +4,7 @@ backend:
   containerPort: 8000
   servicePort: 80
   appName: backend
-  host: "frontend-baguette.jbienvenu.fr"
+  host: "backend-baguette.jbienvenu.fr"
   config:
     db_host: database-service # Ici, il s'agit du nom du service créé dans le template database-service.yaml
     db_user: articles_user
