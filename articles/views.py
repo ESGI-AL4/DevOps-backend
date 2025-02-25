@@ -31,5 +31,6 @@ def articles_view(request):
         else:
             return Response(data.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 def health_view(request):
     return JsonResponse({"status": "OK"})

@@ -22,5 +22,5 @@ from health.views import health_view
 
 urlpatterns = [
     path("articles", articles_view, name="articles"),
-    path('health/', health_view, name='health'),
+    path("health/", health_view, name="health"),
 ]
